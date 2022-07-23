@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import CountryTable from "./CountryTable";
-import SearchBox from "./Searchbox";
+import CountryTable from "./components/CountryTable";
+import SearchBox from "./components/Searchbox";
 
-import { getCountriesApi, searchByCapitalApi } from "./api";
-import fakeList from "./fakeCountries";
+import { getCountriesApi, searchByCapitalApi } from "./api/api";
+import fakeList from "./api/fakeCountries";
 
 function App() {
   const [countryList, setCountryList] = useState();
