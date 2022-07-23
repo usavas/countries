@@ -8,18 +8,27 @@ import fakeList from "./fakeCountries";
 function App() {
   const [countryList, setCountryList] = useState();
 
-  const searchByCapital = async (capital) => {
-    const res = await searchByCapitalApi(capital);
-    setCountryList(res);
+  const fakeSearch = (capital) => {
+    return fakeList.filter((c) => c.capital.includes(capital));
+  };
 
-    console.log("search  by capital called");
+  const searchByCapital = async (capital) => {
+    // const res = await searchByCapitalApi(capital);
+    // setCountryList(res);
+    if (!capital) {
+      setCountryList(fakeList);
+      return;
+    }
+
+    const res = fakeSearch(capital);
+    setCountryList(res);
   };
 
   useEffect(() => {
     async function fetchCountries() {
-      const countries = await getCountriesApi();
-      setCountryList(countries);
-      // setCountryList(fakeList);
+      // const countries = await getCountriesApi();
+      // setCountryList(countries);
+      setCountryList(fakeList);
     }
     fetchCountries();
   }, []);
