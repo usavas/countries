@@ -32,7 +32,7 @@ const CountryTable = ({ countryList }) => {
                   borderRadius: 6,
                 }}
               >
-                {/* <Image width={36} src={c.flags.png}></Image> */}
+                {/* <Image width={36} src={c.flag}></Image> */}
               </div>
             </td>
           </tr>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import CountryTable from "./components/CountryTable";
 import SearchBox from "./components/Searchbox";
 
-import { getCountriesApi, searchByCapitalApi } from "./api/api";
+import { getCountriesApi, searchByCapitalApi, searchFullText } from "./api/api";
 import fakeList from "./api/fakeCountries";
 
 function App() {
@@ -39,6 +39,13 @@ function App() {
       <div className="col-lg-8 col-md-12 offset-lg-2 mt-4">
         <SearchBox searchByCapital={searchByCapital}></SearchBox>
         <CountryTable countryList={countryList}></CountryTable>
+        <button
+          onClick={() => {
+            searchFullText("name");
+          }}
+        >
+          Search all
+        </button>
       </div>
     </div>
   );
