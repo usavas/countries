@@ -1,6 +1,10 @@
 # Countries
 
-This application; - Lists all the officially recognized countries, - Enables searching by capital of the country - Enables full-text-search
+This application;
+
+1. Lists all the officially recognized countries,
+2. Enables searching by capital of the country
+3. Enables full-text-search
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
