@@ -6,7 +6,7 @@ CheckBox.propTypes = {
   toggle: PropTypes.func,
 };
 
-function CheckBox({ isChecked, toggle }) {
+function CheckBox({ isChecked, toggle, title }) {
   return (
     <div className="form-check">
       <input
@@ -18,7 +18,7 @@ function CheckBox({ isChecked, toggle }) {
         onChange={toggle}
       />
       <label className="form-check-label" htmlFor="flexCheckDefault">
-        Full Text Search
+        {title}
       </label>
     </div>
   );

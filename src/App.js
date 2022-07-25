@@ -3,14 +3,10 @@ import CountryTable from "./components/CountryTable";
 import SearchBox from "./components/Searchbox";
 import useCountries from "./hooks/useCountries";
 import { FTSApi, getCountriesApi, searchByCapitalApi } from "./api/api";
-import CheckBox from "./components/CheckBox";
+import RadioBox from "./components/RadioBox";
 
 function App() {
   const [isFTS, setFTS] = useState(false);
-
-  const handleToggleChecked = () => {
-    setFTS((prev) => !prev);
-  };
 
   const { countries, isLoading, isError, mutate } = useCountries();
 
@@ -47,7 +43,20 @@ function App() {
     <div className="App">
       <header className="App-header"></header>
       <div className="col-lg-8 offset-lg-2 col-md-10 offset-md-1 mt-4">
-        <CheckBox checked={isFTS} toggle={handleToggleChecked}></CheckBox>
+        <div>
+          <RadioBox
+            id="bycapital"
+            title="Search By Capital"
+            isChecked={!isFTS}
+            onChangeFunc={() => setFTS(false)}
+          ></RadioBox>
+          <RadioBox
+            id="fts"
+            title="Full Text Search"
+            isChecked={isFTS}
+            onChangeFunc={() => setFTS(true)}
+          ></RadioBox>
+        </div>
         <SearchBox
           isFTS={isFTS}
           searchByCapital={isFTS ? handleFTS : handleSearchByCapital}

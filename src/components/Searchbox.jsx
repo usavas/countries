@@ -1,11 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-SearchBox.prototype = {
-  searchByCapital: PropTypes.func,
-};
-
-function SearchBox({ searchByCapital, isFTS }) {
+const SearchBox = ({ searchByCapital, isFTS }) => {
   let timer;
 
   const handleSearch = (evt) => {
@@ -27,6 +23,11 @@ function SearchBox({ searchByCapital, isFTS }) {
       </div>
     </div>
   );
-}
+};
+
+SearchBox.propTypes = {
+  searchByCapital: PropTypes.func,
+  isFTS: PropTypes.bool,
+};
 
 export default SearchBox;
