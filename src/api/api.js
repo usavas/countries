@@ -35,7 +35,6 @@ export async function FTSApi(string) {
 
   const countries = await getAllCountriesApi();
 
-  // simplify this func
   for (let i = 0; i < countries.length; i++) {
     const country = countries[i];
     if (deepSearch(country, string)) {

@@ -9,7 +9,7 @@ function App() {
   const [isFTS, setFTS] = useState(false);
 
   const handleToggleChecked = () => {
-    setFTS(true);
+    setFTS((prev) => !prev);
   };
 
   const { countries, isLoading, isError, mutate } = useCountries();
@@ -49,6 +49,7 @@ function App() {
       <div className="col-lg-8 offset-lg-2 col-md-10 offset-md-1 mt-4">
         <CheckBox checked={isFTS} toggle={handleToggleChecked}></CheckBox>
         <SearchBox
+          isFTS={isFTS}
           searchByCapital={isFTS ? handleFTS : handleSearchByCapital}
         ></SearchBox>
         <CountryTable countryList={countries}></CountryTable>

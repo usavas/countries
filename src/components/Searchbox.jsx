@@ -1,12 +1,11 @@
 import React from "react";
-import InputGroup from "react-bootstrap/InputGroup";
 import PropTypes from "prop-types";
 
 SearchBox.prototype = {
   searchByCapital: PropTypes.func,
 };
 
-function SearchBox({ searchByCapital }) {
+function SearchBox({ searchByCapital, isFTS }) {
   let timer;
 
   const handleSearch = (evt) => {
@@ -18,14 +17,14 @@ function SearchBox({ searchByCapital }) {
   };
   return (
     <div className="col-sm-4 mb-4">
-      <InputGroup>
+      <div className="input-group">
         <input
           type="text"
-          placeholder="Search By Capital..."
+          placeholder={isFTS ? "Search Full Text" : "Search By Capital..."}
           className="form-control"
           onChange={handleSearch}
         ></input>
-      </InputGroup>
+      </div>
     </div>
   );
 }

@@ -1,6 +1,4 @@
 import React from "react";
-import Table from "react-bootstrap/Table";
-import Image from "react-bootstrap/Image";
 
 import useCountries from "../hooks/useCountries";
 
@@ -12,7 +10,7 @@ const CountryTable = () => {
   if (isError) return <div>Error</div>;
 
   return (
-    <Table striped bordered hover>
+    <table className="table table-striped table-bordered table-hover">
       <thead>
         <tr>
           <th>Name</th>
@@ -32,19 +30,24 @@ const CountryTable = () => {
                 <div
                   style={{
                     display: "inline",
-                    backgroundColor: "gray",
+                    // backgroundColor: "gray",
                     padding: 6,
                     borderRadius: 6,
                   }}
                 >
-                  {/* <Image width={36} src={c.flag}></Image> */}
+                  <img
+                    className="image img-thumbnail"
+                    src={c.flag}
+                    alt={c.name + " flag"}
+                    width={36}
+                  ></img>
                 </div>
               </td>
             </tr>
           );
         })}
       </tbody>
-    </Table>
+    </table>
   );
 };
 

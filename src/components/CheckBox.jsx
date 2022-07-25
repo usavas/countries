@@ -16,7 +16,6 @@ function CheckBox({ isChecked, toggle }) {
         value=""
         checked={isChecked}
         onChange={toggle}
-        onClick={toggle}
       />
       <label className="form-check-label" htmlFor="flexCheckDefault">
         Full Text Search
