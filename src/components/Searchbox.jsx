@@ -1,16 +1,19 @@
 import React from "react";
 import InputGroup from "react-bootstrap/InputGroup";
-import "bootstrap/dist/css/bootstrap.css";
+import PropTypes from "prop-types";
+
+SearchBox.prototype = {
+  searchByCapital: PropTypes.func,
+};
 
 function SearchBox({ searchByCapital }) {
   let timer;
 
   const handleSearch = (evt) => {
-    //TODO: add delay
     clearTimeout(timer);
     timer = setTimeout(() => {
-      searchByCapital(evt.target.value);
-      console.log("Called");
+      const capital = evt.target.value;
+      searchByCapital(capital);
     }, 1000);
   };
   return (

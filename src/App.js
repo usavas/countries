@@ -1,60 +1,57 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import CountryTable from "./components/CountryTable";
 import SearchBox from "./components/Searchbox";
-
-import {
-  getCountriesApi,
-  searchByCapitalApi,
-  naiveFTS,
-  FTS,
-  deepSearch,
-} from "./api/api";
-import fakeList from "./api/fakeCountries";
+import useCountries from "./hooks/useCountries";
+import { FTSApi, getCountriesApi, searchByCapitalApi } from "./api/api";
+import CheckBox from "./components/CheckBox";
 
 function App() {
-  const [countryList, setCountryList] = useState();
+  const [isFTS, setFTS] = useState(false);
 
-  const fakeSearch = (capital) => {
-    return fakeList.filter((c) => c.capital.includes(capital));
+  const handleToggleChecked = () => {
+    setFTS(true);
   };
 
-  const searchByCapital = async (capital) => {
-    // const res = await searchByCapitalApi(capital);
-    // setCountryList(res);
+  const { countries, isLoading, isError, mutate } = useCountries();
+
+  const handleSearchByCapital = async (capital) => {
     if (!capital) {
-      setCountryList(fakeList);
+      const allCountries = await getCountriesApi();
+      mutate(allCountries, { revalidate: false });
+      return;
+    }
+    const updated = await searchByCapitalApi(capital);
+    mutate(updated, {
+      revalidate: false,
+    });
+  };
+
+  const handleFTS = async (text) => {
+    if (!text) {
+      const allCountries = await getCountriesApi();
+      mutate(allCountries, { revalidate: false });
       return;
     }
 
-    const res = fakeSearch(capital);
-    setCountryList(res);
+    const updated = await FTSApi(text);
+    mutate(updated, {
+      revalidate: false,
+    });
   };
 
-  useEffect(() => {
-    async function fetchCountries() {
-      // const countries = await getCountriesApi();
-      // setCountryList(countries);
-      setCountryList(fakeList);
-    }
-    fetchCountries();
-  }, []);
+  if (isError) return <p>Error: Could not fetch the countries!</p>;
+
+  if (isLoading) return <p>Loading...</p>;
 
   return (
     <div className="App">
       <header className="App-header"></header>
-      <div className="col-lg-8 col-md-12 offset-lg-2 mt-4">
-        <SearchBox searchByCapital={searchByCapital}></SearchBox>
-        <CountryTable countryList={countryList}></CountryTable>
-        <button
-          onClick={async () => {
-            // naiveFTS("name");
-
-            const res = await FTS("Türkçe");
-            setCountryList(res);
-          }}
-        >
-          Search all
-        </button>
+      <div className="col-lg-8 offset-lg-2 col-md-10 offset-md-1 mt-4">
+        <CheckBox checked={isFTS} toggle={handleToggleChecked}></CheckBox>
+        <SearchBox
+          searchByCapital={isFTS ? handleFTS : handleSearchByCapital}
+        ></SearchBox>
+        <CountryTable countryList={countries}></CountryTable>
       </div>
     </div>
   );

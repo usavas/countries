@@ -1,8 +1,6 @@
 let timesCalled = 0;
 
 export function deepSearch(obj, string) {
-  console.log("obj", obj);
-
   timesCalled++;
   // if the parameter is null then nothing to check, return false
   if (!obj) {

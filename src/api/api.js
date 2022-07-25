@@ -14,6 +14,13 @@ export async function getCountriesApi() {
   return countries;
 }
 
+async function getAllCountriesApi() {
+  const res = await axios.get(all);
+  const countries = res.data;
+
+  return countries;
+}
+
 export async function searchByCapitalApi(capital) {
   const res = await axios.get(byCapital(capital));
   const countries = res.data;
@@ -21,17 +28,16 @@ export async function searchByCapitalApi(capital) {
   return countries;
 }
 
-export async function FTS(string) {
-  const res = await axios.get(all);
-  console.log(res);
-
-  const data = res.data;
-
+export async function FTSApi(string) {
   const t0 = performance.now();
 
   let founds = [];
-  for (let i = 0; i < data.length; i++) {
-    const country = data[i];
+
+  const countries = await getAllCountriesApi();
+
+  // simplify this func
+  for (let i = 0; i < countries.length; i++) {
+    const country = countries[i];
     if (deepSearch(country, string)) {
       founds.push(country);
     }
@@ -42,26 +48,4 @@ export async function FTS(string) {
 
   console.log("found results", founds);
   return founds;
-}
-
-export async function naiveFTS(string) {
-  const res = await axios.get(all);
-  console.log(res);
-
-  const data = res.data;
-
-  const t0 = performance.now();
-
-  let founds = [];
-  for (let i = 0; i < data.length; i++) {
-    const json = JSON.stringify(data[i]);
-    if (json.includes(string)) {
-      founds.push(data[i]);
-    }
-  }
-
-  const t1 = performance.now();
-  console.log(`Naive search took ${t1 - t0} milliseconds.`);
-
-  console.log("found results", founds);
 }
