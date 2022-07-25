@@ -4,7 +4,7 @@ import App from "./App";
 test("renders learn react link", async () => {
   render(<App />);
   await waitFor(() => {
-    const buttonElement = screen.getByText(/Search/i);
+    const buttonElement = screen.getAllByText(/Search/i)[0];
     expect(buttonElement).toBeInTheDocument();
   });
 });
