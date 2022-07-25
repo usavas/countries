@@ -1,4 +1,5 @@
 import axios from "axios";
+import { deepSearch } from "../util/deepSearch";
 
 const baseUri = "https://restcountries.com/v2";
 const fieldsQuery = "?fields=name,capital,region,flag";
@@ -20,7 +21,30 @@ export async function searchByCapitalApi(capital) {
   return countries;
 }
 
-export async function searchFullText(string) {
+export async function FTS(string) {
+  const res = await axios.get(all);
+  console.log(res);
+
+  const data = res.data;
+
+  const t0 = performance.now();
+
+  let founds = [];
+  for (let i = 0; i < data.length; i++) {
+    const country = data[i];
+    if (deepSearch(country, string)) {
+      founds.push(country);
+    }
+  }
+
+  const t1 = performance.now();
+  console.log(`Naive search took ${t1 - t0} milliseconds.`);
+
+  console.log("found results", founds);
+  return founds;
+}
+
+export async function naiveFTS(string) {
   const res = await axios.get(all);
   console.log(res);
 

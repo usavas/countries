@@ -2,7 +2,13 @@ import React, { useEffect, useState } from "react";
 import CountryTable from "./components/CountryTable";
 import SearchBox from "./components/Searchbox";
 
-import { getCountriesApi, searchByCapitalApi, searchFullText } from "./api/api";
+import {
+  getCountriesApi,
+  searchByCapitalApi,
+  naiveFTS,
+  FTS,
+  deepSearch,
+} from "./api/api";
 import fakeList from "./api/fakeCountries";
 
 function App() {
@@ -40,8 +46,11 @@ function App() {
         <SearchBox searchByCapital={searchByCapital}></SearchBox>
         <CountryTable countryList={countryList}></CountryTable>
         <button
-          onClick={() => {
-            searchFullText("name");
+          onClick={async () => {
+            // naiveFTS("name");
+
+            const res = await FTS("Türkçe");
+            setCountryList(res);
           }}
         >
           Search all
