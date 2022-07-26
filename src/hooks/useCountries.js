@@ -1,5 +1,5 @@
 import useSWR from "swr";
-import { getCountriesApi, searchByCapitalApi } from "../api/api";
+import { getCountriesApi } from "../api/api";
 
 export const ALL_COUNTRIES_WITH_FIELDS = "allCountriesWithFields";
 

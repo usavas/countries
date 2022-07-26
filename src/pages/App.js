@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import CountryTable from "./components/CountryTable";
-import SearchBox from "./components/Searchbox";
-import useCountries from "./hooks/useCountries";
-import { FTSApi, getCountriesApi, searchByCapitalApi } from "./api/api";
-import RadioBox from "./components/RadioBox";
+import CountryTable from "../components/CountryTable";
+import SearchBox from "../components/Searchbox";
+import useCountries from "../hooks/useCountries";
+import { FTSApi, getCountriesApi, searchByCapitalApi } from "../api/api";
+import RadioBox from "../components/RadioBox";
 
 function App() {
   const [isFTS, setFTS] = useState(false);
