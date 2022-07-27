@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import CountryTable from "../components/CountryTable";
 import SearchBox from "../components/Searchbox";
 import useCountries from "../hooks/useCountries";
-import { FTSApi, getCountriesApi, searchByCapitalApi } from "../api/api";
+import {
+  FTSApi,
+  getAllCountriesForListingApi,
+  searchByCapitalApi,
+} from "../api/api";
 import RadioBox from "../components/RadioBox";
 
 function App() {
@@ -12,7 +16,7 @@ function App() {
 
   const handleSearchByCapital = async (capital) => {
     if (!capital) {
-      const allCountries = await getCountriesApi();
+      const allCountries = await getAllCountriesForListingApi();
       mutate(allCountries, { revalidate: false });
       return;
     }
@@ -24,7 +28,7 @@ function App() {
 
   const handleFTS = async (text) => {
     if (!text) {
-      const allCountries = await getCountriesApi();
+      const allCountries = await getAllCountriesForListingApi();
       mutate(allCountries, { revalidate: false });
       return;
     }

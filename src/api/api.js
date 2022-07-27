@@ -7,7 +7,7 @@ const all = baseUri + "/all";
 const allWithFields = all + fieldsQuery;
 const byCapital = (capital) => baseUri + "/capital/" + capital;
 
-export async function getCountriesApi() {
+export async function getAllCountriesForListingApi() {
   const res = await axios.get(allWithFields);
 
   const statusInfo = checkApiResponseStatus(res.status);
