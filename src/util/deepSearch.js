@@ -30,7 +30,10 @@ export function jsonSearch(json, string, caseSensitive) {
   }
 
   // if not array then now it is an object
-  const props = Object.getOwnPropertyNames(json);
+  const props = [
+    ...Object.getOwnPropertyNames(json),
+    ...Object.getOwnPropertySymbols(json),
+  ];
   for (const p of props) {
     const val = json[p];
 

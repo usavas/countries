@@ -80,13 +80,23 @@ describe("searchProps", () => {
     const res = jsonSearch(
       {
         id: 1,
-        description: "South Florida's Best Meetups on Youtube",
+        persons: [
+          {
+            name: {
+              first: "John",
+              last: "Dash",
+            },
+            addresses: [
+              { street: "John Nash Street, Simon Bolivar Blv, 16554" },
+            ],
+            [Symbol()]: { test: "test 1" },
+          },
+          { name: { first: "George", last: "Carlin" } },
+        ],
         url: "https://www.youtube.com/bocajs",
-        types: ["tutorial"],
-        topics: ["js", "html"],
         levels: ["beginner", "intermediate", "advanced"],
       },
-      "://"
+      "test 1"
     );
 
     expect(res).toBeTruthy();
