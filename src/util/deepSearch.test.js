@@ -3,80 +3,61 @@ import fakeCountries from "../api/fakeCountries";
 import { fakeData } from "./fakeData";
 
 describe("searchProps", () => {
-  test("should include", () => {
+  test("should find Kabu as capital of Afghanistan", () => {
     const res = jsonSearch(fakeCountries[0], "Kabu");
 
     expect(res).toBeTruthy();
     console.log("Kabu", getTimesCalled());
   });
 
-  test("should not include", () => {
+  test("should not find the text not existing in an array's items", () => {
     const res = jsonSearch(["tesing", "mes"], "est");
 
     expect(res).toBeFalsy();
     console.log("est", getTimesCalled());
   });
 
-  test("should check for Turkish chars", () => {
+  test("should find the existing Turkish chars in countries array", () => {
     const res = jsonSearch(fakeCountries, "Türkçe");
     expect(res).toBeTruthy();
   });
 
-  test("should check for Japanese chars", () => {
+  test("should find the Japanese chars in countries array", () => {
     const res = jsonSearch(fakeCountries, "ガニスタン");
     expect(res).toBeTruthy();
   });
 
-  test("should check for deeply nested arabic chars", () => {
+  test("should find the deeply nested arabic chars", () => {
     const res = jsonSearch(fakeCountries, "Jāmiʻat ad-Duwal al-ʻArabīyah");
     expect(res).toBeTruthy();
   });
 
-  test("should check for item in array", () => {
+  test("should find the item existing in a sub-array", () => {
     const res = jsonSearch(fakeCountries, ".tr");
     expect(res).toBeTruthy();
   });
 
-  test("should check for numbers", () => {
-    const res = jsonSearch(fakeCountries, "");
-    expect(res).toBeTruthy();
-  });
-
-  test("should not include Kabule", () => {
+  test("should not find Kabule in Afghanistan json data", () => {
     const res = jsonSearch(fakeCountries[0], "Kabule");
 
     expect(res).toBeFalsy();
     console.log("Kabule", getTimesCalled());
   });
 
-  test("should include AFG", () => {
-    const res = jsonSearch(fakeCountries[0], "AFG");
-
-    expect(res).toBeTruthy();
-    console.log("AFG", getTimesCalled());
-  });
-
-  test("should include Taliban.svg", () => {
+  test("should find Taliban.svg for Afghanistan", () => {
     const res = jsonSearch(fakeCountries[0], "Taliban.svg");
 
     expect(res).toBeTruthy();
     console.log("Taliban.svg", getTimesCalled());
   });
 
-  test("should return true for AFN", () => {
-    const res = jsonSearch(fakeCountries[0], "AFN");
-
-    expect(res).toBeTruthy();
-    console.log("AFN", getTimesCalled());
-  });
-
-  test("should return true for fake data", () => {
+  test("should return true for another sample data", () => {
     const res = jsonSearch(fakeData, "500 mg");
 
     expect(res).toBeTruthy();
     console.log("Fake Data", getTimesCalled());
   });
-  test("should return true for number", () => {
+  test("should return true for symbol property", () => {
     const res = jsonSearch(
       {
         id: 1,
