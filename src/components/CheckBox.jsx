@@ -11,13 +11,14 @@ function CheckBox({ isChecked, toggle, title }) {
     <div className="form-check">
       <input
         id="isFTS"
+        name={title}
         className="form-check-input"
         type="checkbox"
         value=""
         checked={isChecked}
         onChange={toggle}
       />
-      <label className="form-check-label" htmlFor="flexCheckDefault">
+      <label className="form-check-label" htmlFor={title}>
         {title}
       </label>
     </div>

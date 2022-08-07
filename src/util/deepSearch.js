@@ -1,24 +1,28 @@
 let timesCalled = 0;
 
-export function deepSearch(obj, string) {
+export function jsonSearch(json, string, caseSensitive) {
   timesCalled++;
+
   // if the parameter is null then nothing to check, return false
-  if (!obj) {
+  if (!json) {
     return false;
   }
 
   // if primitive type then just check the content
-  if (typeof obj !== "object") {
-    if (obj.toString().includes(string)) {
-      return true;
-    }
-    return false;
+  if (typeof json !== "object") {
+    const jsonSearched = caseSensitive
+      ? String(json)
+      : String(json).toLowerCase();
+    const textToSearchFor = caseSensitive ? string : string.toLowerCase();
+
+    const res = jsonSearched.includes(textToSearchFor);
+    return res;
   }
 
   // check if it is array
-  if (Array.isArray(obj)) {
-    for (const item of obj) {
-      const r = deepSearch(item, string);
+  if (Array.isArray(json)) {
+    for (const item of json) {
+      const r = jsonSearch(item, string, caseSensitive);
       if (r) {
         return true;
       }
@@ -26,11 +30,11 @@ export function deepSearch(obj, string) {
   }
 
   // if not array then now it is an object
-  const props = Object.getOwnPropertyNames(obj);
+  const props = Object.getOwnPropertyNames(json);
   for (const p of props) {
-    const val = obj[p];
+    const val = json[p];
 
-    const r = deepSearch(val, string);
+    const r = jsonSearch(val, string, caseSensitive);
     if (r) return r;
   }
 

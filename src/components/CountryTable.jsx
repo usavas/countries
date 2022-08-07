@@ -1,14 +1,6 @@
 import React from "react";
 
-import useCountries from "../hooks/useCountries";
-
-const CountryTable = () => {
-  const { countries, isError, isLoading } = useCountries();
-
-  if (isLoading) return <div>Loading</div>;
-
-  if (isError) return <div>Error</div>;
-
+const CountryTable = ({ countryList }) => {
   return (
     <table className="table table-striped table-bordered table-hover">
       <thead>
@@ -20,7 +12,7 @@ const CountryTable = () => {
         </tr>
       </thead>
       <tbody>
-        {countries.map((c) => {
+        {countryList.map((c) => {
           return (
             <tr key={c.name}>
               <td>{c.name}</td>

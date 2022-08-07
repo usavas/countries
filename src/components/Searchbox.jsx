@@ -1,18 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const SearchBox = ({ searchByCapital, isFTS }) => {
+const SearchBox = ({ searchFunc, isFTS, caseSensitive }) => {
   let timer;
 
   const handleSearch = (evt) => {
     clearTimeout(timer);
     timer = setTimeout(() => {
       const capital = evt.target.value;
-      searchByCapital(capital);
+      searchFunc(capital);
     }, 1000);
   };
   return (
-    <div className="col-sm-4 mb-4">
+    <div className="col-sm-4">
       <div className="input-group">
         <input
           type="text"
