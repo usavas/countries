@@ -4,7 +4,7 @@ export function jsonSearch(json, string, caseSensitive) {
   timesCalled++;
 
   // if the parameter is null then nothing to check, return false
-  if (!json) {
+  if (!json || typeof json === "boolean") {
     return false;
   }
 
